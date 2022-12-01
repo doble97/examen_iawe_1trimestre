@@ -107,7 +107,7 @@ session_start();
 
 
   <div id="container">
-    <form>
+    <form action="presupuesto.php" method="GET">
       <div class="form-group">
         <label for="exampleSelect1" class="form-label mt-4">Seleccione tiempo de envío:</label>
         <select class="form-select" id="exampleSelect1" name="tiempo_envio">
@@ -128,7 +128,7 @@ session_start();
 
         <div class="col-sm-4">
           <div class=" input-group">
-            <input type="text" type="text" lass="form-control" id="dimen_profundo" name="dimen_profundo" placeholder="ancho">
+            <input type="number" lass="form-control" id="dimen_profundo" name="dimen_ancho" placeholder="ancho">
             <div class="input-group-append">
               <span class="input-group-text">cm</span>
             </div>
@@ -137,7 +137,7 @@ session_start();
 
         <div class="col-sm-4">
           <div class=" input-group">
-            <input type="text" type="text" id="dimen_profundo" name="dimen_profundo" placeholder="alto">
+            <input type="number" id="dimen_profundo" name="dimen_alto" placeholder="alto">
             <div class="input-group-append">
               <span class="input-group-text">cm</span>
             </div>
@@ -146,7 +146,7 @@ session_start();
 
         <div class="col-sm-4">
           <div class=" input-group">
-            <input type="text" type="text" id="dimen_profundo" name="dimen_profundo" placeholder="profundidad">
+            <input type="number" id="dimen_profundo" name="dimen_profundidad" placeholder="profundidad">
             <div class="input-group-append">
               <span class="input-group-text">cm</span>
             </div>
@@ -156,7 +156,7 @@ session_start();
       </div>
       <div class="form-group">
         <label for="inputPeso" class="form-label mt-4">Peso: </label>
-        <input type="number" class="form-control" id="inputPeso" aria-describedby="Peso" placeholder="Peso en kilogramaos">
+        <input type="number" class="form-control" id="inputPeso" aria-describedby="Peso" placeholder="Peso en kilogramaos" name="peso">
       </div>
       <br>
       <br>

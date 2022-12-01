@@ -1,5 +1,40 @@
 <?php
 session_start();
+require("datos.php");
+$tiempo;
+$ancho;
+$alto;
+$profundidad;
+$peso;
+
+if(isset($_GET["tiempo_envio"]) and isset($_GET["dimen_ancho"]) and isset($_GET["dimen_alto"]) and isset($_GET["dimen_profundidad"]) and
+isset($_GET["peso"]) and 
+!empty($_GET["dimen_ancho"]) and !empty($_GET["dimen_alto"]) and !empty($_GET["dimen_profundidad"]) and !empty($_GET["peso"])
+){
+  $tiempo = $_GET["tiempo_envio"];
+  $ancho = $_GET["dimen_ancho"];
+  $alto = $_GET["dimen_alto"];
+  $profundidad = $_GET["dimen_profundidad"];
+  $peso = $_GET["peso"];
+  //Guardando los datos en la sesion
+  $_SESSION["tiempo"] = $_GET["tiempo_envio"];
+  $_SESSION["ancho"] = $_GET["dimen_ancho"];
+  $_SESSION["alto"] = $_GET["dimen_alto"];
+  $_SESSION["profundidad"] = $_GET["dimen_profundidad"];
+  $_SESSION["peso"] = $_GET["peso"];
+}elseif(isset($_SESSION["tiempo"]) and isset($_SESSION["ancho"]) and isset($_SESSION["alto"]) and isset($_SESSION["profundidad"]) and 
+isset($_SESSION["peso"])){
+  $tiempo = $_SESSION["tiempo"];
+  $ancho = $_SESSION["ancho"];
+  $alto = $_SESSION["alto"];
+  $profundidad = $_SESSION["profundidad"];
+  $peso = $_SESSION["peso"];
+}else{
+  header("Location: index.php");
+}
+$volumen = $ancho*$alto*$profundidad;
+$presupuesto = $tiempo + ($volumen*$peso);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -126,13 +161,39 @@ session_start();
           <h2>Presupuesto</h2>
         </center>
 
-        <span>Dadas las dimensiones el paquete es de tamaño:__________</span>
+        <span>Dadas las dimensiones el paquete es de tamaño:
+          <?php
+            $tam_paq="grande_2";
+            foreach($paquetes_tamano as $clave=>$valor){
+              if ($volumen<=$valor){
+                $tam_paq = $clave;
+                break;
+              }
+            }
+            echo $tam_paq;
+          ?>
+        </span>
         <br>
-        <span>Considerado en la categoria de peso : _________</span>
+        <span>Considerado en la categoria de peso : 
+          <?php
+            $cat_paq="limite";
+            foreach($paquetes_peso as $clave=>$valor){
+              if($peso<=$valor){
+                $cat_paq = $clave;
+                break;
+              }
+            }
+            echo $cat_paq;
+          ?>
+        </span>
         <br>
         <div class="form-group">
           <label for="inputPresupuesto" class="form-label mt-4">Presupuesto:</label>
-          <input type="text" id="inputPresupuesto" name="inputPresupuesto" placeholder="Presupuesto"> €
+          <input type="text" id="inputPresupuesto" name="inputPresupuesto"
+            <?php
+              echo "value='$presupuesto' disabled";
+            ?>
+          > €
         </div>
         <br>
         <center>
