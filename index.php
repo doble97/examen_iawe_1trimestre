@@ -58,6 +58,7 @@ session_start();
 
 <body>
   <?php
+  require('datos.php');
   $tema_navbar = "navbar navbar-expand-lg navbar-dark bg-primary";
   if (isset($_SESSION["tema_navbar"])) {
     $tema_navbar = $_SESSION["tema_navbar"];
@@ -109,12 +110,17 @@ session_start();
     <form>
       <div class="form-group">
         <label for="exampleSelect1" class="form-label mt-4">Seleccione tiempo de envío:</label>
-        <select class="form-select" id="exampleSelect1">
-          <option>1</option>
+        <select class="form-select" id="exampleSelect1" name="tiempo_envio">
+          <!-- <option>1</option>
           <option>2</option>
           <option>3</option>
           <option>4</option>
-          <option>5</option>
+          <option>5</option> -->
+          <?php
+            foreach($tiempo_envio as $clave => $valor){
+              echo "<option value='$valor'>$clave</option>";
+            }
+          ?>
         </select>
       </div>
       <div class="row fgdimensiones">
